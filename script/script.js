@@ -21,6 +21,12 @@ document.getElementById("start-button").addEventListener("click", event => {
   renderQuestions();
 });
 
+document.getElementByClass("answer").addEventListener("click", event => {
+  //Do something
+});
+document.getElementByClass("not-answer").addEventListener("click", event => {
+  //Do something else
+});
 //Loop through array to grab questions from object and present them to screen with buttons for the multiple choices
 
 function renderQuestions() {
@@ -38,7 +44,11 @@ function renderQuestionChoices() {
     var questionChoicesEl = document.getElementById("question-choices");
     var options = document.createElement("button");
     options.innerHTML = questionChoicesArray[i].text;
-    options.setAttribute("value", questionChoicesArray[i].answer);
+    if (questionChoicesArray[i].answer == true) {
+      options.classList.add("answer");
+    } else {
+      options.classList.add("not-answer");
+    }
     questionChoicesEl.append(options);
   }
 }
