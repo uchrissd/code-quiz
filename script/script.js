@@ -43,7 +43,8 @@ function renderQuestionChoices() {
   for (var option = 0; option < question.length; option++) {
     var questionOptionsDiv = document.getElementById("question-choices");
     var questionButtons = document.createElement("button");
-    questionButtons.className = "btn btn-primary d-flex justify-content-around";
+    questionButtons.className =
+      "btn btn-outline-primary btn-lg d-flex justify-content-around";
     questionButtons.innerHTML = question[option];
 
     //This fires the check answer function when the user clicks a question choices button
@@ -63,7 +64,7 @@ function clearQuestionDiv() {
   quizOver();
 }
 
-//This function checks the user choices with the answer
+//This function checks if the user selected the correct answer
 function checkAnswer(question, answer) {
   console.log("question: ", question);
   console.log("asnwer: ", answer);
@@ -74,7 +75,6 @@ function checkAnswer(question, answer) {
     console.log(score);
     console.log("Correct");
   }
-
   //Whether they get the right or wrong answer, the program continues to the next question and deducts 15 seconds from the quiz clock
   else index = index + 1;
   countDown = countDown - 15;
