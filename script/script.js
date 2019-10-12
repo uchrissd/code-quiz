@@ -2,15 +2,12 @@ window.onload = function() {
   console.log("starting");
 };
 
-//Variables for index, countdown, score
+//Global ariables for index, countdown, score
 
 var index = 0;
 var countDown = 15;
 var score = 0;
-
-//DOM variables
-
-//Button text
+var highScore = 0;
 
 //Iniate the quiz on click of the start button and remove the hidden class from the first group of divs
 
@@ -20,22 +17,8 @@ document.getElementById("start-button").addEventListener("click", event => {
   document.getElementById("quiz-questions").classList.remove("d-none");
   renderQuestions();
 });
-//When user submits the correct answer, promt them with the next question
-if (document.getElementsByClassName("answer")) {
-  addEventListener("click", event => {
-    // console.log(index);
-    //Do something
-  });
-}
-//When the user submits the wrong answer, alert them and re-prompt them with the current question
-if (document.getElementsByClassName("not-answer")) {
-  addEventListener("click", event => {
-    alert;
-    //Do something else
-  });
-}
-//This function renders the questions from the question array to the HTML page
 
+//This fucntion renders the questions
 function renderQuestions() {
   var questionsIndexLength = questions.length - 1;
   if (index <= questionsIndexLength) {
@@ -46,22 +29,41 @@ function renderQuestions() {
 
 //This function renders the multiple-choice options on the HTML page as buttons
 function renderQuestionChoices() {
-  var questionChoicesArray = questions[index].choices;
-  for (var i = 0; i < questionChoicesArray.length; i++) {
+  var question = questions[index].choices;
+  console.log(question);
+  for (var option = 0; option < question.length; option++) {
     // console.log(i);
-    var questionChoicesEl = document.getElementById("question-choices");
-    var options = document.createElement("button");
-    options.innerHTML = questionChoicesArray[i].text;
-    if (questionChoicesArray[i].answer == true) {
-      options.classList.add("answer");
-    } else {
-      options.classList.add("not-answer");
-    }
-    questionChoicesEl.append(options);
+    var questionOptionsDiv = document.getElementById("question-choices");
+    var questionButtons = document.createElement("button");
+    questionButtons.innerHTML = question[option];
+    //index = question #
+    questionButtons.setAttribute(
+      "onclick",
+      "checkAnswer(" + index + "," + option + ");"
+    );
+    questionOptionsDiv.append(questionButtons);
   }
 }
 
-function goToNextQuestion() {}
+function clearQuestionDiv() {
+  console.log("About to clear html");
+  document.getElementById("question-choices").innerHTML = "";
+}
+
+function checkAnswer(question, answer) {
+  console.log("question: ", question);
+  console.log("asnwer: ", answer);
+  let correctAnswer = questions[question].answer;
+  let userAnswer = questions[question].choices[answer];
+  if (userAnswer == correctAnswer) {
+    index = index + 1;
+    console.log("Next question: ", index);
+    clearQuestionDiv();
+    renderQuestions();
+
+    console.log("Correct");
+  } else console.log("Incorrect");
+}
 
 //I need a function that creates buttons
 //I need a function that captures the events
