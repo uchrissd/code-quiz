@@ -4,10 +4,15 @@ window.onload = function() {
 
 //Global ariables for index, countdown, score
 
+//Index is equal to the question number
 var index = 0;
+//Main countdown clock
 var countDown = 75;
+//User score
 var score = 0;
+//User highschore
 var highScore = 0;
+//Variable for quiz time
 var quizTime;
 
 //Iniate the quiz on click of the start button and remove the hidden class from the first group of divs
@@ -28,6 +33,7 @@ function renderQuestions() {
     document.getElementById("question").innerHTML = questions[index].title;
     renderQuestionChoices();
   }
+  quizOver();
 }
 
 //This function renders the multiple-choice options on the HTML page as buttons
@@ -39,7 +45,7 @@ function renderQuestionChoices() {
     var questionButtons = document.createElement("button");
     questionButtons.className = "btn btn-primary d-flex justify-content-around";
     questionButtons.innerHTML = question[option];
-    //index = question #
+
     //This fires the check answer function when the user clicks a question choices button
     questionButtons.setAttribute(
       "onclick",
@@ -47,30 +53,37 @@ function renderQuestionChoices() {
     );
     questionOptionsDiv.append(questionButtons);
   }
+  quizOver();
 }
 
+//This function clears the divs in preperation for rendering the next question
 function clearQuestionDiv() {
   console.log("About to clear html");
   document.getElementById("question-choices").innerHTML = "";
+  quizOver();
 }
 
+//This function checks the user choices with the answer
 function checkAnswer(question, answer) {
   console.log("question: ", question);
   console.log("asnwer: ", answer);
   let correctAnswer = questions[question].answer;
   let userAnswer = questions[question].choices[answer];
   if (userAnswer == correctAnswer) {
-    index = index + 1;
     score = score + 1;
+    index = index + 1;
     console.log(score);
-    console.log("Next question: ", index);
-    clearQuestionDiv();
-    renderQuestions();
-
     console.log("Correct");
-  } else alert("Uh oh! That's the wrong answer. Try again!");
+  }
 
+  //Whether they get the right or wrong answer, the program continues to the next question and deducts 15 seconds from the quiz clock
+  else index = index + 1;
+  countDown = countDown - 15;
+  console.log("Next question: ", index);
+  clearQuestionDiv();
+  renderQuestions();
   console.log("Incorrect");
+  quizOver();
 }
 
 //This function starts the countdown for the time left clock quiz timer when the user clicks the start button
@@ -80,11 +93,17 @@ function setTime() {
   countDown--;
   if (countDown == -1) {
     clearInterval(quizTime);
-    alert("Time out!!");
   }
+  quizOver();
 }
 
-function userScore() {}
+//This is a function that checks to see if these conditions are being met in other functions within the program
+function quizOver() {
+  if (index >= 4 || countDown <= 0) {
+    document.getElementById("quiz-questions").classList.add("d-none");
+    document.getElementById("all-done").classList.remove("d-none");
+  }
+}
 
 //I need a function that creates buttons
 //I need a function that captures the events
