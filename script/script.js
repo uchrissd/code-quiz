@@ -8,6 +8,7 @@ var index = 0;
 var countDown = 75;
 var score = 0;
 var highScore = 0;
+var quizTime;
 
 //Iniate the quiz on click of the start button and remove the hidden class from the first group of divs
 
@@ -15,7 +16,9 @@ document.getElementById("start-button").addEventListener("click", event => {
   console.log("hello");
   document.getElementById("start-quiz").classList.add("d-none");
   document.getElementById("quiz-questions").classList.remove("d-none");
+  setTime();
   renderQuestions();
+  quizTime = setInterval(setTime, 1000);
 });
 
 //This fucntion renders the questions
@@ -32,11 +35,12 @@ function renderQuestionChoices() {
   var question = questions[index].choices;
   console.log(question);
   for (var option = 0; option < question.length; option++) {
-    // console.log(i);
     var questionOptionsDiv = document.getElementById("question-choices");
     var questionButtons = document.createElement("button");
+    questionButtons.className = "btn btn-primary d-flex justify-content-around";
     questionButtons.innerHTML = question[option];
     //index = question #
+    //This fires the check answer function when the user clicks a question choices button
     questionButtons.setAttribute(
       "onclick",
       "checkAnswer(" + index + "," + option + ");"
@@ -69,10 +73,7 @@ function checkAnswer(question, answer) {
   console.log("Incorrect");
 }
 
-//This variable sets the time for the quiz by taking in the set time function
-var quizTime = setInterval(setTime, 1000);
-
-//This function starts the countdown for the time left clock quiz timer
+//This function starts the countdown for the time left clock quiz timer when the user clicks the start button
 
 function setTime() {
   document.getElementById("quiz-time").innerHTML = countDown + "sec left";
