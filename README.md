@@ -17,11 +17,15 @@ The program is written in native JavaScript. The JavaScript uses the DOM API to 
 Here are 4 screenshots of the application.
 
 _Web version_
+
 ![Code quiz screenshot](assets/images/desktop-code-quiz-question-screenshot.jpg)
+
 ![Code quiz screenshot](assets/images/desktop-code-quiz-screenshot.jpg)
 
 _Mobile version_
+
 ![Code quiz screenshot](assets/images/mobile-code-quiz-question-screenshot.jpg)
+
 ![Code quiz screenshot](assets/images/mobile-code-quiz-screenshot.jpg)
 
 **Code Example**
