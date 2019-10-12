@@ -9,7 +9,7 @@ var index = 0;
 //Main countdown clock
 var countDown = 75;
 //User score
-var score = 0;
+var score = 75;
 //User highschore
 var highScore = 0;
 //Variable for quiz time
@@ -70,7 +70,6 @@ function checkAnswer(question, answer) {
   let correctAnswer = questions[question].answer;
   let userAnswer = questions[question].choices[answer];
   if (userAnswer == correctAnswer) {
-    score = score + 1;
     index = index + 1;
     console.log(score);
     console.log("Correct");
@@ -79,6 +78,8 @@ function checkAnswer(question, answer) {
   //Whether they get the right or wrong answer, the program continues to the next question and deducts 15 seconds from the quiz clock
   else index = index + 1;
   countDown = countDown - 15;
+  score = score - 15;
+  console.log(score);
   console.log("Next question: ", index);
   clearQuestionDiv();
   renderQuestions();
@@ -102,6 +103,7 @@ function quizOver() {
   if (index >= 4 || countDown <= 0) {
     document.getElementById("quiz-questions").classList.add("d-none");
     document.getElementById("all-done").classList.remove("d-none");
+    clearInterval(quizTime);
   }
 }
 
