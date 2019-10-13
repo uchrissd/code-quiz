@@ -103,12 +103,7 @@ function quizOver() {
   if (index >= 4 || countDown <= 0) {
     document.getElementById("quiz-questions").classList.add("d-none");
     document.getElementById("all-done").classList.remove("d-none");
+
     clearInterval(quizTime);
   }
 }
-
-//I need a function that creates buttons
-//I need a function that captures the events
-// I need a function that prompts the questions and redraws the buttons
-//I need a function that prompts correct or not
-//
