@@ -57,4 +57,4 @@ function checkAnswer(question, answer) {
 
 **Installation**
 
-No installation necessary. Project is hosted here: https://uchrissd.github.io/chrisunderwood.github.io/
+No installation necessary. Project is hosted here: https://uchrissd.github.io/code-quiz/
