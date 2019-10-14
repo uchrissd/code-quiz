@@ -105,6 +105,7 @@ function quizOver() {
   if (index >= 4 || countDown <= 0) {
     document.getElementById("quiz-questions").classList.add("d-none");
     document.getElementById("all-done").classList.remove("d-none");
+    document.getElementById("final-score").innerHTML = countDown;
 
     clearInterval(quizTime);
   }
