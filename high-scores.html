@@ -25,16 +25,35 @@
           <div class="row">
             <div class="col-md">
               <h1 class="text-center" id="high-score">High Scores</h1>
-              <div class="text-center">
-                <button>Go Back</button>
-                <button>Clear High Scores</button>
-              </div>
+
+              <button>Go Back</button>
+              <button>Clear High Scores</button>
             </div>
           </div>
         </div>
 
-        <script type="text/javascript" src="script/script.js"></script>
         <script type="text/javascript" src="script/questions.js"></script>
+        <script>
+          function renderHighScores() {
+            var highScoreContainer = document.getElementById("high-score");
+            var storedHighScores = JSON.parse(
+              localStorage.getItem("highScoreList")
+            );
+            console.log("list", storedHighScores);
+            console.log(highScoreContainer);
+            for (var i = 0; i < storedHighScores.length; i++) {
+              var initial = document.createElement("span");
+              initial.innerHTML = storedHighScores[i].initials;
+              var highScore = document.createElement("span");
+              highScore.innerHTML = storedHighScores[i].score;
+              var br = document.createElement("br");
+              highScoreContainer.appendChild(highScore);
+              highScoreContainer.appendChild(initial);
+              highScoreContainer.appendChild(br);
+            }
+          }
+          renderHighScores();
+        </script>
       </body>
     </html>
   </body>
