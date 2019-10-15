@@ -113,3 +113,25 @@ function quizOver() {
 }
 
 //Store user intitials
+
+//Save high score
+document.getElementById("initials-button").addEventListener("click", saveScore);
+
+function saveScore() {
+  var userInitials = document.querySelector("#initial-input").value;
+  var finalScore = countDown;
+
+  var scoreObject = { initials: userInitials, score: finalScore };
+
+  var highScores = localStorage.getItem("highScoreList");
+
+  if (highScores == null) {
+    localStorage.setItem("highScoreList", JSON.stringify([scoreObject]));
+    console.log(highScores);
+  } else {
+    highScoreList = JSON.parse(highScores);
+    console.log(typeof highScoreList);
+    highScoreList.push(scoreObject);
+    localStorage.setItem("highScoreList", JSON.stringify(highScoreList));
+  }
+}
