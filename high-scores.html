@@ -21,11 +21,11 @@
         <title>Super Cool Code Quiz High Scores</title>
       </head>
       <body>
-        <div class="container mt-5" id="high-score-container">
+        <div class="container mt-5">
           <div class="row">
             <div class="col-md">
               <h1 class="text-center" id="high-score">High Scores</h1>
-              <ul class="list-group font-weight-bold" id="finalScoreList"></ul>
+              <div id="finalScoreListContainer"></div>
 
               <a href="index.html">
                 <button class="btn btn-lg btn-success">Go Back</button></a
@@ -40,45 +40,43 @@
         <script type="text/javascript" src="script/questions.js"></script>
         <script>
           function renderHighScores() {
-            var highScoreContainer = document.getElementById("high-score");
-            var storedHighScores = JSON.parse(
-              localStorage.getItem("highScoreList")
+            var highScoreContainer = document.getElementById(
+              "finalScoreListContainer"
             );
+
+            var storedHighScores = localStorage.getItem("highScoreList");
+            if (storedHighScores == null) {
+              document.getElementById("scoreList").remove();
+              return;
+            }
+
+            storedHighScores = JSON.parse(storedHighScores);
             console.log("list", storedHighScores);
             console.log(highScoreContainer);
+
+            var containerList = document.createElement("ol");
+            containerList.setAttribute("id", "scoreList");
             for (var i = 0; i < storedHighScores.length; i++) {
-              var initial = document.createElement("li");
-              initial.setAttribute(
-                "class",
-                "list-group-item list-group-item-success "
-              );
-              initial.innerHTML = storedHighScores[i].initials;
               var highScore = document.createElement("li");
               highScore.setAttribute(
                 "class",
                 "list-group-item list-group-item-success"
               );
-              highScore.innerHTML = storedHighScores[i].score;
-              var br = document.createElement("br");
-              br.setAttribute(
-                "class",
-                "list-group-item list-group-item-success"
-              );
-              finalScoreList.appendChild(highScore);
-              finalScoreList.appendChild(initial);
-              finalScoreList.appendChild(br);
+              highScore.innerHTML =
+                storedHighScores[i].initials + " " + storedHighScores[i].score;
+
+              containerList.appendChild(highScore);
             }
+            highScoreContainer.appendChild(containerList);
           }
           renderHighScores();
 
-          function clearHighScores() {
-            var clearButton = document.querySelector("#clear-storage");
-            clearButton.addEventListener("click", function() {
-              localStorage.removeItem(finalScoreList);
-              finalScoreList = [];
-              renderHighScores();
-            });
-          }
+          var clearButton = document.querySelector("#clear-storage");
+          clearButton.addEventListener("click", function() {
+            localStorage.removeItem("highScoreList");
+
+            renderHighScores();
+          });
         </script>
       </body>
     </html>
