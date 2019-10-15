@@ -6,7 +6,7 @@ This is a code quiz which tests a user's knowledge of basic JavaScript concepts.
 
 **Build status**
 
-The application is not totally complete. There is additional logic and local storage issues that need to be resolved.
+The application is done though there a few aspects of the application that could be improved upon.
 
 **Code style**
 
