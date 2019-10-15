@@ -112,15 +112,15 @@ function quizOver() {
   }
 }
 
-//Store user intitials
-
-//Save high score
+//Event listener to fire the function that allows the user to save their initial and high score
 document.getElementById("initials-button").addEventListener("click", saveScore);
 
+//Function for saving high score and initial
 function saveScore() {
   var userInitials = document.querySelector("#initial-input").value;
   var finalScore = countDown;
 
+  //Object stores intitials and high scores
   var scoreObject = { initials: userInitials, score: finalScore };
 
   var highScores = localStorage.getItem("highScoreList");

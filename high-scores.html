@@ -39,6 +39,7 @@
 
         <script type="text/javascript" src="script/questions.js"></script>
         <script>
+          //This function renders the user high score
           function renderHighScores() {
             var highScoreContainer = document.getElementById(
               "finalScoreListContainer"
@@ -54,6 +55,7 @@
             console.log("list", storedHighScores);
             console.log(highScoreContainer);
 
+            //Variable that creates the ordered list to store the user initials and high score
             var containerList = document.createElement("ol");
             containerList.setAttribute("id", "scoreList");
             for (var i = 0; i < storedHighScores.length; i++) {
@@ -71,6 +73,7 @@
           }
           renderHighScores();
 
+          //This code allows the user to clear the local storage once the quiz is finished
           var clearButton = document.querySelector("#clear-storage");
           clearButton.addEventListener("click", function() {
             localStorage.removeItem("highScoreList");
