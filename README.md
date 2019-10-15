@@ -43,14 +43,16 @@ function checkAnswer(question, answer) {
     console.log("Correct");
   }
   //Whether they get the right or wrong answer, the program continues to the next question and deducts 15 seconds from the quiz clock
-  else index = index + 1;
-  countDown = countDown - 15;
-  score = score - 15;
-  console.log(score);
-  console.log("Next question: ", index);
+  else {
+    index = index + 1;
+    countDown = countDown - 15;
+    score = score - 15;
+    console.log(score);
+    console.log("Next question: ", index);
+    console.log("Incorrect");
+  }
   clearQuestionDiv();
   renderQuestions();
-  console.log("Incorrect");
   quizOver();
 }
 ```
