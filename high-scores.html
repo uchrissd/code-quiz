@@ -25,9 +25,14 @@
           <div class="row">
             <div class="col-md">
               <h1 class="text-center" id="high-score">High Scores</h1>
+              <ul class="list-group font-weight-bold" id="finalScoreList"></ul>
 
-              <a href="index.html"> <button>Go Back</button></a>
-              <button>Clear High Scores</button>
+              <a href="index.html">
+                <button class="btn btn-lg btn-success">Go Back</button></a
+              >
+              <button id="clear-storage" class="btn btn-lg btn-success">
+                Clear High Scores
+              </button>
             </div>
           </div>
         </div>
@@ -42,17 +47,38 @@
             console.log("list", storedHighScores);
             console.log(highScoreContainer);
             for (var i = 0; i < storedHighScores.length; i++) {
-              var initial = document.createElement("span");
+              var initial = document.createElement("li");
+              initial.setAttribute(
+                "class",
+                "list-group-item list-group-item-success "
+              );
               initial.innerHTML = storedHighScores[i].initials;
-              var highScore = document.createElement("span");
+              var highScore = document.createElement("li");
+              highScore.setAttribute(
+                "class",
+                "list-group-item list-group-item-success"
+              );
               highScore.innerHTML = storedHighScores[i].score;
               var br = document.createElement("br");
-              highScoreContainer.appendChild(highScore);
-              highScoreContainer.appendChild(initial);
-              highScoreContainer.appendChild(br);
+              br.setAttribute(
+                "class",
+                "list-group-item list-group-item-success"
+              );
+              finalScoreList.appendChild(highScore);
+              finalScoreList.appendChild(initial);
+              finalScoreList.appendChild(br);
             }
           }
           renderHighScores();
+
+          function clearHighScores() {
+            var clearButton = document.querySelector("#clear-storage");
+            clearButton.addEventListener("click", function() {
+              localStorage.removeItem(finalScoreList);
+              finalScoreList = [];
+              renderHighScores();
+            });
+          }
         </script>
       </body>
     </html>
